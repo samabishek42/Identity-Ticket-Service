@@ -19,21 +19,21 @@ class AppAuthFilter(
         try {
             val appId = request.getHeader("AppId")
             val providedAppSecret = request.getHeader("AppSecret")
-            val awsTempKey = appAuthProperties.awsKey
+            val awsTempKey = appAuthProperties.getAwsKey()
 
             if (appId.isNullOrBlank() || providedAppSecret.isNullOrBlank() || awsTempKey.isNullOrBlank()) {
                 response.status = HttpServletResponse.SC_UNAUTHORIZED
                 return
             }
 
-            val appList = appAuthProperties.appList
+            val appList = appAuthProperties.getAppList()
             var matchedServiceName: String? = null
             var matchedPolicyId: String? = null
 
             for ((serviceName, appInfo) in appList) {
                 if (appInfo.appId == appId) {
                     matchedServiceName = serviceName
-                    matchedPolicyId = appInfo.policyid
+                    matchedPolicyId = appInfo.policyId
                     break
                 }
             }
