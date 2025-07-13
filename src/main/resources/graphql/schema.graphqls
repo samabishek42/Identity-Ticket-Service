@@ -1,0 +1,41 @@
+type Mutation {
+  issueOfflineTicket(input: TicketInput!): Ticket
+  createSession(input: SessionInput!): Session
+  revokeSession(sessionId: String!): Boolean
+}
+
+type Query {
+  validateOfflineTicket(token: String!): Boolean
+  validateSession(sessionId: String!): Boolean
+}
+
+input TicketInput {
+  userId: String!
+  audience: String!
+  purpose: String!
+}
+
+input SessionInput {
+  offlineTicket: String!
+  userId: String!
+  clientIp: String!
+  userAgent: String!
+}
+
+type Ticket{
+  id: String
+  purpose: String
+  issuedAt: String
+  expiry: String
+  issuer: String
+  audience: String
+  signature: String
+}
+
+type Session {
+  sessionId: String
+  userId: String
+  accessToken: String
+  expiresAt: String
+}
+

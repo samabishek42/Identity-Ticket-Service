@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: ticketService
+
+
+trusted-apps:
+  aws-key: TEMP_KEY_123
+  app-list:
+    federation-sync-service:
+      appId: feds321
+      policyId: policy-101
+    partner-auth-service:
+      appId: pauth123
+      policyId: policy-201
+
